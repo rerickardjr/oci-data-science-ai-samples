@@ -36,8 +36,14 @@ In this workshop, you will:
 
 ![](./images/postman4.png)
 
-* Navigate to your workspace and open the newly forked environment (OCI Credentials), and set the variables tenancyId, authUserId, keyFingerprint, and private Key. These are the same value that are found in the .oci file you created in Lab 4 (Task 2). 
-* Make sure to set both Initial Value and Current Value of the variables(set both as the same value).
+* Navigate to your workspace and open the newly forked environment (OCI Credentials), and set the variables `tenancyId`, `authUserId`, and `keyFingerprint` with values from the .oci file you created in Lab 4 (Task 2).
+
+* **Security Best Practice for Private Key**: Do NOT paste your private key directly into Postman's current or initial values. Instead:
+  - Store the private key in a `.env` file in your local project (excluded from version control)
+  - Use Postman's **Secret** type for the `privateKey` variable to mask sensitive data
+  - Or use environment variables in your system and reference them in Postman
+
+* Set both Initial Value and Current Value of non-sensitive variables to the same value.
 * Click the Save button to commit your changes to the environment.
 ![](./images/postman5.png)
 
@@ -58,30 +64,34 @@ In this workshop, you will:
 
 ![](./images/request3.png)
 
-* Edit the payload given below according to your model ID, data(in inputLocation), outputLocation, and compartment ID.
-  * modelId can be found in the details of the model created in Lab1(Task 2).
-  (Note: data should be base64 encoded)
-  ```
+* Edit the payload below according to your configuration. Replace placeholder values:
+  - `your-model-id`: From Lab 1 (Task 2) model details
+  - `your-base64-content`: Base64-encoded document (use an [online encoder](https://www.base64encode.org/) or command line: `base64 your-file.pdf`)
+  - `your-bucket-name`: Object Storage bucket name
+  - `your-namespace`: OCI Object Storage namespace
+  - `your-compartment-id`: Compartment where model exists
+
+  ```json
   {
     "processorConfig": {
       "processorType": "GENERAL",
-        "features": [
-          {
-            "featureType": "KEY_VALUE_EXTRACTION",
-            "modelId": <model_id>
-          }
-        ]
-      },
+      "features": [
+        {
+          "featureType": "KEY_VALUE_EXTRACTION",
+          "modelId": "your-model-id"
+        }
+      ]
+    },
     "inputLocation": {
       "sourceType": "INLINE_DOCUMENT_CONTENT",
-      "data": <base64 encoded document>
+      "data": "your-base64-content"
     },
     "outputLocation": {
-      "bucketName": <name of the bucket>,
-      "namespaceName": <namespace under which model exists>,
-      "prefix": "prefix"
+      "bucketName": "your-bucket-name",
+      "namespaceName": "your-namespace",
+      "prefix": "results"
     },
-    "compartmentId": <ID of the compartment where the model is created>
+    "compartmentId": "your-compartment-id"
   }
   ```
 

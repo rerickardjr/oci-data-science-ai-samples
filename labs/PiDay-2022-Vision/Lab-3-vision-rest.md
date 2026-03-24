@@ -28,7 +28,7 @@ We have put together a Postman Collection and Environment to help you get starte
 1. In the *Import* dialog, click the **Upload Files** button and select the json file you exported in the previous step.
   ![](./images/postman-importupload.png)
 
-1. Use this [link](https://www.postman.com/oracledevs/workspace/oracle-cloud-infrastructure-rest-apis/environment/29850-eab82db8-e9a1-4200-9f39-de10b4a0f371) to download the **OCI Credentials Environment**. The link opens Postman on the web. Select **Environmments** on the left side of the screen then select **OCI Credentials**. One the right side of the screen find the 3 dots and click it to open a popup menu. On the menu click **Export** to export the credentials file and save it to your local computer.
+1. Use this [link](https://www.postman.com/oracledevs/workspace/oracle-cloud-infrastructure-rest-apis/environment/29850-eab82db8-e9a1-4200-9f39-de10b4a0f371) to download the **OCI Credentials Environment**. The link opens Postman on the web. Select **Environments** on the left side of the screen then select **OCI Credentials**. On the right side of the screen find the 3 dots and click it to open a popup menu. On the menu click **Export** to export the credentials file and save it to your local computer.
   ![](./images/postman-exportoci.png)
 
 1. Import the OCI Credentials file (**OCI Credentials.postman_environment.json**) into Postman running on your local machine by using the **Import** button at the top.
@@ -97,7 +97,14 @@ Now we will set the variables in the OCI Credentials in your local POSTMAN and y
 
   ![](./images/postman-fingerprint.png " ")
 
-9. On your local computer, navigate to the **private key file (*username-date*.pem)** that you downloaded when getting the fingerprint. Open it in a text editor, copy it's contents, and paste them into the **private_key CURRENT VALUE** field of the Postman Environment.
+9. On your local computer, navigate to the **private key file (*username-date*.pem)** that you downloaded when getting the fingerprint. Open it in a text editor and copy its contents.
+
+   **Security Best Practice**: Instead of pasting the private key directly into Postman's current value, store it securely using one of these methods:
+   - Use Postman's **Secret** type for variables to mask sensitive data
+   - Store the key path as a variable and reference it from your system environment
+   - Use Postman's built-in **Vault** feature for sensitive values
+
+   Paste the key into the **private_key** field using your chosen secure method.
   ![](./images/postman-privatekey.png " ")
 
 #### region ####
